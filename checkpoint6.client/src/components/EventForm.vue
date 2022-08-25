@@ -113,7 +113,7 @@ export default {
       editable,
       async handleSubmit() {
         try {
-          logger.log('creating events', editable.value)
+          logger.log('creating event', editable.value)
           await eventsService.createEvent(editable.value)
           Pop.toast('Event Created!')
         } catch (error) {

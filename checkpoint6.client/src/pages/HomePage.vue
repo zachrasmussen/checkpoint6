@@ -1,9 +1,21 @@
-<template></template>
+<template>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="masonry bg-dark">
+        <div class="" v-for="e in events" :key="e.id">
+          <EventCard :album="e" />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 
 <script>
 import { ref } from '@vue/reactivity';
 import { AppState } from '../AppState';
 import Pop from '../utils/Pop';
+import { computed, onMounted } from '@vue/runtime-core';
+import { eventsService } from '../services/EventsService';
 
 export default {
   name: 'Home',
@@ -17,14 +29,12 @@ export default {
       }
     }
 
-
     onMounted(() => {
       getEvents();
     })
     return {
       filterTerm,
       events: computed(() => AppState.events.filter(e => filterTerm.value ? e.type == filterTerm.value : true)),
-
     }
   }
 
