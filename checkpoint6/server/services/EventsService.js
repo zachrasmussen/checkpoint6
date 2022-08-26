@@ -41,7 +41,7 @@ class EventsService {
         event.capacity = eventData.capacity || event.capacity
         event.type = eventData.type || event.type
         event.startDate = eventData.startDate || event.startDate
-
+        event.coverImg = eventData.coverImg || event.coverImg
         await event.save()
         return event
     }

@@ -77,20 +77,27 @@
               />
             </div>
             <div class="col-6">
-              <label for="" class="form-label">Type</label>
+              <label for="" class="form-label">Category</label>
               <select
                 v-model="editable.type"
                 name=""
                 id=""
                 class="form-control"
               >
-                <option value="animals">Animals</option>
-                <option value="games">Games</option>
-                <option value="food">Food</option>
-                <option value="nature">Nature</option>
-                <option value="misc">Misc</option>
+                <option value="concert">Concert</option>
+                <option value="convention">Convention</option>
+                <option value="sport">Sport</option>
+                <option value="digital">Digital</option>
               </select>
             </div>
+            <label for="Description"></label>
+            <textarea
+              name="description"
+              v-model="editable.description"
+              id="title"
+              cols="10"
+              rows="10"
+            ></textarea>
             <button class="col-6 btn btn-success">Submit</button>
           </form>
         </div>
