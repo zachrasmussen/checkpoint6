@@ -112,17 +112,23 @@ import { ref } from '@vue/reactivity';
 import { eventsService } from '../services/EventsService.js';
 import { logger } from '../utils/Logger.js';
 import Pop from '../utils/Pop.js';
+import { useRouter } from 'vue-router';
+import { Modal } from 'bootstrap';
 
 export default {
   setup() {
+    const router = useRouter()
     const editable = ref({})
     return {
+
       editable,
       async handleSubmit() {
         try {
           logger.log('creating event', editable.value)
-          await eventsService.createEvent(editable.value)
+          const tEvent = await eventsService.createEvent(editable.value)
+          Modal.getOrCreateInstance("#create-event").hide()
           Pop.toast('Event Created!')
+          router.push({ name: 'EventDetails', params: { eventId: tEvent.id } })
         } catch (error) {
           Pop.error(error)
         }

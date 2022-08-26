@@ -17,23 +17,14 @@
       <span class="navbar-toggler-icon" />
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
-      <ul class="navbar-nav me-auto">
-        <li>
-          <router-link
-            :to="{ name: 'About' }"
-            class="btn text-success lighten-30 selectable text-uppercase"
-          >
-            About
-          </router-link>
-        </li>
-      </ul>
+      <ul class="navbar-nav me-auto"></ul>
       <button
         type="button"
-        class="btn btn-primary btn-lg"
+        class="btn btn-primary btn-lg rounded-circle mx-3"
         data-bs-toggle="modal"
         data-bs-target="#create-event"
       >
-        Create Event
+        +
       </button>
       <!-- LOGIN COMPONENT HERE -->
       <Login />

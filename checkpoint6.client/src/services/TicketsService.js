@@ -1,6 +1,6 @@
-const { AppState } = require("../AppState");
-const { logger } = require("../utils/Logger");
-const { api } = require("./AxiosService");
+import { AppState } from "../AppState";
+import { logger } from "../utils/Logger";
+import { api } from "./AxiosService";
 
 
 
@@ -8,7 +8,7 @@ class TicketsService {
     async create(newTicket) {
         const res = await api.post('api/tickets', newTicket)
         logger.log('Create Tickets', res.data)
-        AppState.ticketCreator.push(res.data)
+        AppState.ticketCreators.push(res.data)
     }
 
     async getTicketsByEvent(eventId) {

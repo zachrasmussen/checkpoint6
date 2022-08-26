@@ -1,14 +1,6 @@
 <template>
   <div class="container-fluid">
-    <div class="row">
-      <div class="col-12">
-        <h2>Tickets</h2>
-      </div>
-      <div v-for="t in ticketEvent" :key="t.id" class="col-3">
-        <TicketEvent :ticket="t" />
-      </div>
-    </div>
-    <div class="row bg-dark py-1 px-5 text-light">
+    <div class="d-flex justify-content-evenly row bg-dark py-3 px-5 text-light">
       <div class="col-12">
         <h2>Popular Events</h2>
       </div>
@@ -44,8 +36,8 @@
         Digital
       </div>
     </div>
-    <div class="masonry bg-dark">
-      <div class="" v-for="e in events" :key="e.id">
+    <div class="row">
+      <div class="col-12" v-for="e in events" :key="e.id">
         <EventCard :event="e" />
       </div>
     </div>
@@ -86,13 +78,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.masonry {
-  columns: 200px;
-  column-gap: 1em;
-
-  div {
-    display: block;
-    margin-bottom: 1em;
-  }
-}
 </style>
