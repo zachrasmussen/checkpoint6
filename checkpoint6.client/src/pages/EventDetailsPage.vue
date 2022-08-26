@@ -4,12 +4,11 @@
       <div class="col-12">
         <h2>{{ event.title }}</h2>
       </div>
-      <!-- SECTION todo add button to for tickets -->
+
       <div class="col-3">
         <img class="img-fluid" :src="event.coverImg" alt="" />
       </div>
       <div class="col-2">
-        <!-- SECTION collab button hide if you are already a collaborator -->
         <button v-if="!ticket" class="btn btn-info" @click="ticket">
           Tickets
         </button>
@@ -29,7 +28,7 @@
         </div>
       </div>
     </div>
-    <!-- SECTION pictures -->
+
     <CommentForm />
     <div class="row">
       <CommentCard :comment="c" v-for="c in comments" :key="c.id" />
