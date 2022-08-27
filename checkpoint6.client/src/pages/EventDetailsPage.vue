@@ -52,6 +52,15 @@
           >
             Sold Out
           </button>
+          <!-- Instead of disabling....make this a new button that on the @click will remove the ticket....you will need to pass the ticket id -->
+          <button
+            v-else-if="isAttending"
+            class="btn btn-warning"
+            disabled
+            @click="ticket"
+          >
+            Already Attending
+          </button>
 
           <button
             v-else-if="isAttending"
@@ -80,7 +89,8 @@
         <div class="row">
           <h4 class="text-center my-3">See Who's Attending!</h4>
           <div
-            v-for="t in ticketCreators"
+            v-for="t in eventTickets"
+            :key="t.id"
             class="col-1 d-flex justify-content-evenly my-2"
           >
             <img
@@ -131,6 +141,14 @@ export default {
       }
     }
 
+    async function getTicketsByEvent() {
+      try {
+        await ticketsService.getTicketsByEvent(route.params.eventId)
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
+
     async function getTicketCreator() {
       try {
         await ticketsService.getTicketCreatorByEvent(route.params.eventId)
@@ -142,15 +160,17 @@ export default {
     onMounted(() => {
       getEventsById();
       getCommentsByEventId();
+      getTicketsByEvent()
       // getTicketCreator()
     })
     return {
       event: computed(() => AppState.activeEvent),
       comments: computed(() => AppState.comments),
+      eventTickets: computed(() => AppState.eventTickets),
       ticketCreators: computed(() => AppState.ticketCreators),
       account: computed(() => AppState.account),
       isAttending: computed(() => {
-        if (AppState.ticketCreators.find(t => t.accountId == AppState.account.id)) {
+        if (AppState.eventTickets.find(t => t.accountId == AppState.account.id)) {
           return true
         }
         return false
@@ -160,6 +180,7 @@ export default {
         try {
           let newTicket = {
             eventId: AppState.activeEvent.id,
+            accountId: AppState.account.id,
           }
           logger.log('tickets', newTicket)
           await ticketsService.create(newTicket)
@@ -223,4 +244,8 @@ export default {
   height: 55px;
   width: 55px;
 }
+
+/* .container:hover{
+  cursor:pointer
+} */
 </style>

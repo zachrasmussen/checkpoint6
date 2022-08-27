@@ -40,16 +40,18 @@ class TicketsService {
         return eventTicket
     }
     async deleteTicket(ticketId, userId) {
-        const ticket = await dbContext.Tickets.findById(ticketId).populate('creator', 'name picture')
+        const ticket = await dbContext.Tickets.findById(ticketId)
         // @ts-ignore
-        if (comment.creatorId.toString() != userId) {
+        if (ticket.accountId.toString() !== userId) {
             throw new BadRequest("You don't have permission to delete that")
         }
-
+        // go and find the event for this ticket....you will need to think of what properties exist on a ticket
+        // increase the event capacity after ticket deletion
+        // remember to save the event after we change it
         // @ts-ignore
-        await comment.deleteTicket()
+        await ticket.remove()
         // @ts-ignore
-        return `comment ${comment.name} was deleted`
+        return `ticket was deleted`
     }
 }
 

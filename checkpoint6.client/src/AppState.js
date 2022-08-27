@@ -16,5 +16,7 @@ export const AppState = reactive({
 
   ticketCreators: [],
 
+  eventTickets: [],
+
   ticketEvents: []
 })

@@ -8,13 +8,13 @@ class TicketsService {
     async create(newTicket) {
         const res = await api.post('api/tickets', newTicket)
         logger.log('Create Tickets', res.data)
-        AppState.ticketCreators.push(res.data)
+        AppState.eventTickets.push(res.data)
     }
 
     async getTicketsByEvent(eventId) {
         const res = await api.get(`api/events/${eventId}/tickets`)
         logger.log('Get Tickets', res.data)
-        AppState.ticketCreator = res.data
+        AppState.eventTickets = res.data
     }
 
     async getTicketsByEventByAccount() {
