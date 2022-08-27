@@ -34,7 +34,6 @@ export default {
           if (!yes) {
             return;
           }
-          debugger
           await commentsService.deleteComment(id);
         } catch (error) {
           logger.error("[Deleting Comment]", error);

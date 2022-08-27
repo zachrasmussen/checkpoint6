@@ -62,14 +62,13 @@
             Already Attending
           </button>
 
-          <button
+          <!-- <button
             v-else-if="isAttending"
             class="btn btn-warning"
-            disabled
-            @click="ticket"
+            @click="removeTicket"
           >
-            Already Attending
-          </button>
+            Remove Ticket
+          </button> -->
 
           <button v-else class="btn btn-primary" @click="ticket">
             Attend Event
@@ -85,6 +84,7 @@
           </button>
         </div>
       </div>
+      <!-- SECTION this is to show the people attending the event -->
       <div class="col-12 my-3">
         <div class="row">
           <h4 class="text-center my-3">See Who's Attending!</h4>
@@ -93,6 +93,10 @@
             :key="t.id"
             class="col-1 d-flex justify-content-evenly my-2"
           >
+            <i
+              @click="deleteTicket(ticket.id)"
+              class="mdi mdi-delete selectable"
+            ></i>
             <img
               class="img-fluid profile-picture rounded-circle elevation-2"
               :src="t.profile.picture"
@@ -175,6 +179,25 @@ export default {
         }
         return false
       }),
+      removeTicket: computed((ticketId) => {
+        if (AppState.eventTickets.find(t => AppState.account.id == t.accountId)) {
+          return true
+        }
+        return false
+      }),
+
+      async deleteTicket(id) {
+        try {
+          const yes = await Pop.confirm("Delete this ticket?");
+          if (!yes) {
+            return;
+          }
+          await ticketsService.deleteTicket(id);
+        } catch (error) {
+          logger.error("[Deleting Ticket]", error);
+          Pop.error(error);
+        }
+      },
 
       async ticket() {
         try {

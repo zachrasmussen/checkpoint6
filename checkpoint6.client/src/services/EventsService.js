@@ -25,6 +25,13 @@ class EventsService {
         return res.data
     }
 
+    async deleteTicket(id) {
+        const res = await api.delete('api/account/tickets')
+        if (res.data) {
+            AppState.comments = AppState.comments.filter(c => c.comments !== id)
+        }
+    }
+
     async cancelEvent(id) {
         const res = await api.delete('api/events/' + id)
         logger.log('delete this event', res.data)

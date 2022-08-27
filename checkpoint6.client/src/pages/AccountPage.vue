@@ -8,20 +8,37 @@
     <div class="col-8 d-flex justify-content-center">
       <h2>My Tickets</h2>
     </div>
-    <div v-for="t in ticketEvent" :key="t.id" class="col-3">
+    <div v-for="t in ticket" :key="t.id" class="col-3">
       <TicketEvent :ticket="t" />
     </div>
   </div>
 </template>
 
 <script>
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import { AppState } from '../AppState'
+import { api } from '../services/AxiosService'
 export default {
   name: 'Account',
   setup() {
+    async function getMyTickets(id) {
+      const res = await api.get('api/account/tickets')
+      logger.log('Get Tickets By Event', res.data)
+      AppState.events = res.data
+    }
+    async function getEventsById() {
+      try {
+        await eventsService.getById(route.params.eventId)
+      } catch (error) {
+        Pop.error(error)
+      }
+    }
+    onMounted(() => {
+      getMyTickets();
+    })
     return {
-      account: computed(() => AppState.account)
+      account: computed(() => AppState.account),
+      events: computed(() => AppState.events)
     }
   }
 }
