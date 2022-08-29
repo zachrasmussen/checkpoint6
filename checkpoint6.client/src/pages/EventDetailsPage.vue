@@ -93,10 +93,6 @@
             :key="t.id"
             class="col-1 d-flex justify-content-evenly my-2"
           >
-            <i
-              @click="deleteTicket(ticket.id)"
-              class="mdi mdi-delete selectable"
-            ></i>
             <img
               class="img-fluid profile-picture rounded-circle elevation-2"
               :src="t.profile.picture"
@@ -233,32 +229,6 @@ export default {
   },
 }
 
-// return {
-//   event: computed(() => AppState.activeEvent),
-//   comments: computed(() => AppState.comments),
-//   ticketCreators: computed(() => AppState.ticketCreators),
-
-//   async ticket() {
-//     try {
-//       let newTicket = {
-//         eventId: AppState.activeEvent.id,
-//       }
-//       logger.log('tickets', newTicket)
-//       await ticketsService.create(newTicket)
-//     } catch (error) {
-//       Pop.error(error)
-//     }
-//   },
-//   async removeTicket() {
-//     try {
-//       let ticketToRemove = AppState.ticketCreators.find(t => t.accountId == AppState.account.id)
-//       await ticketsService.removeTicket(ticketToRemove.id)
-//     } catch (error) {
-//       Pop.error(error)
-//     }
-//   },
-//   components: { CommentCard, CommentForm }
-// };
 
 </script>
 

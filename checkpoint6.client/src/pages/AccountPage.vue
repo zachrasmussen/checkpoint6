@@ -24,7 +24,7 @@ export default {
     async function getMyTickets(id) {
       const res = await api.get('api/account/tickets')
       logger.log('Get Tickets By Event', res.data)
-      AppState.events = res.data
+      AppState.tickets = res.data
     }
     async function getEventsById() {
       try {

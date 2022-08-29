@@ -17,6 +17,12 @@ class TicketsService {
         AppState.eventTickets = res.data
     }
 
+    async getMyTickets(eventId) {
+        const res = await api.get('api/account/tickets')
+        logger.log('Get My Tickets', res.data)
+        AppState.myTickets = res.data
+    }
+
     async getTicketsByEventByAccount() {
         const res = await api.get('account/tickets')
         logger.log('Get Event Tickets', res.data)
@@ -34,7 +40,7 @@ class TicketsService {
         const res = await api.delete('api/tickets/')
         logger.log('Remove Ticket', res.data)
         AppState.ticketCreator = AppState.ticketCreator.filter(t => t.id != ticketId)
-        AppState.ticketEvent = AppState.ticketEvent.filter(t => t.id != ticketId)
+        AppState.ticketEvent = AppState.ticketEvent.filter(t => ticketId != t.id)
     }
 }
 
